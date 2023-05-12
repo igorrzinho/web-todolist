@@ -24,7 +24,7 @@ export default function Home() {
             Organize Suas Tarefas Diarias
           </h2>
           <div className="p-24">
-            <Link to={logado ? '/tasks' : '/cadastro'}>
+            <Link to={logado ? '/tasks' : '/login'}>
               <div className="bg-color2 rounded-full hover:scale-125">
                 <img src={Arrow} alt="" />
               </div>
