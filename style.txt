@@ -1,0 +1,5 @@
+azul-cinza: #B8D3D9
+azul-claro: #AEDFF2
+azul-medio: #6DCCF2
+azul-escuro: #55B3D9
+cinza: #465259
