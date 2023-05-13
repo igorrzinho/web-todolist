@@ -5,13 +5,26 @@ import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 export default function Tasks() {
   const id_usuario = localStorage.getItem('id_usuario');
-  const [task, setTask] = React.useState(8);
-  const [conTask, setConTask] = React.useState(2);
+  const [task, setTask] = React.useState(0);
   const [data, setData] = React.useState([]);
   const [textTask, setTextTask] = React.useState('');
   const navigate = useNavigate();
   let token = localStorage.getItem('token');
-
+  const date = new Date();
+  const months = [
+    'jan',
+    'fev',
+    'mar',
+    'abr',
+    'mai',
+    'jun',
+    'jul',
+    'ago',
+    'set',
+    'out',
+    'nov',
+    'dez',
+  ];
   async function changeTask(id, complete) {
     try {
       await api.put(`/puttask/${id}`, {
@@ -53,8 +66,14 @@ export default function Tasks() {
     try {
       const resTasks = await api.get(`/selecttask/${id_usuario}`);
       const dados = resTasks.data;
-      setTask(dados.length);
       setData(dados);
+      var a = 0;
+      dados.forEach((d) => {
+        if (d.complete == 0) {
+          a++;
+        }
+      });
+      setTask(a);
     } catch {}
   }
   return (
@@ -64,9 +83,17 @@ export default function Tasks() {
           <nav>
             <ul>
               <li className="mb-8">
-                <h2 className="font-semibold text-color4">24 ago 2023</h2>
+                <h2 className="font-semibold text-color4">
+                  {date.getDate() +
+                    ' ' +
+                    months[date.getMonth()] +
+                    ' ' +
+                    date.getFullYear()}
+                </h2>
               </li>
-              <li className="text-color4">{task} tarefas</li>
+              <li className="text-color4">
+                {task} {task == 1 ? 'tarefa' : 'tarefas'} para fazer
+              </li>
             </ul>
           </nav>
         </div>
